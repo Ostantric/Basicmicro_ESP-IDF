@@ -1,0 +1,6 @@
+################################### ESP-IDF IGNORE #####################################
+.vscode/
+build/
+sdkconfig
+sdkconfig.old
+*.code-workspace
