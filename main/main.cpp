@@ -71,7 +71,7 @@ static void MCP_Controller_Listen(void *parameter){
                 xSemaphoreGive( ( MCP_Serial_Semaphore ) );  // Make the MCP Serial Port available for use, by "Giving" the Semaphore.
             }
         }
-            ESP_LOGI(MCP_TAG,"Motor1 -> Position: %d, Velocity: %d, Amp: %f", Motor1_current_position,Motor1_current_velocity, float(Motor1_amper/100)); // read the documentation for unit conversations
+            ESP_LOGI(MCP_TAG,"Motor1 -> Position: %d, Velocity: %d, Amp: %.3f", Motor1_current_position,Motor1_current_velocity, float(Motor1_amper)/100); // read the documentation for unit conversations
     }
 }
 static void MCP_Controller_Drive(void *parameter){
