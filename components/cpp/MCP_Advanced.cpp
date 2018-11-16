@@ -38,6 +38,7 @@ MCP_Advanced::~MCP_Advanced(){
 }
 
 void MCP_Advanced::start(long speed){
+	gpio_num_t TX_PIN,RX_PIN;
     uart_config_t uart_config = {
         .baud_rate = speed,
         .data_bits = UART_DATA_8_BITS,
@@ -45,8 +46,22 @@ void MCP_Advanced::start(long speed){
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
     };
+	switch(uart_num){
+		case UART_NUM_0 : 
+			TX_PIN = GPIO_NUM_3;
+			RX_PIN = GPIO_NUM_1;
+		case UART_NUM_1 :
+			TX_PIN = GPIO_NUM_10;
+			RX_PIN = GPIO_NUM_9;
+		case UART_NUM_2 :
+			TX_PIN = GPIO_NUM_17;
+			RX_PIN = GPIO_NUM_16;
+		default :
+			TX_PIN = GPIO_NUM_10;
+			RX_PIN = GPIO_NUM_9;
+	}
 	uart_param_config(uart_num, &uart_config);
-    uart_set_pin(uart_num, GPIO_NUM_17, GPIO_NUM_16, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+    uart_set_pin(uart_num, TX_PIN, RX_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     uart_driver_install(uart_num, RX_BUF_SIZE , TX_BUF_SIZE, 0, NULL, 0);
 }
 int MCP_Advanced::available(){

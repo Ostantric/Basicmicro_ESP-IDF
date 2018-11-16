@@ -35,7 +35,7 @@
 
 static const char *MCP_TAG = "MCP_Controller";
 static SemaphoreHandle_t MCP_Serial_Semaphore = NULL;
-MCP_Advanced MCP_Controller(UART_NUM_2,5);
+MCP_Advanced MCP_Controller(UART_NUM_1,5);
 
 extern "C"{
 void app_main();
@@ -95,8 +95,7 @@ static void MCP_Controller_Drive(void *parameter){
     }
 }
 
-void app_main()
-{
+void app_main(){
     if ( MCP_Serial_Semaphore == NULL )  // Check to confirm that the MCP_Serial_Semaphore has not already been created.
     {
         MCP_Serial_Semaphore = xSemaphoreCreateMutex();  // Create a mutex semaphore, we will use to manage the MCP Serial
